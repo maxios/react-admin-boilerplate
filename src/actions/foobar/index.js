@@ -1,11 +1,11 @@
-import { lookupOrganizations } from '@/api';
+import { fetchFoobar as fetchFoobarApi } from '@/api';
 
-export const fetchOrganizations = () => {
+export const fetchFoobar = () => {
   return dispatch => new Promise((resolve, reject) => {
-    lookupOrganizations()
+    fetchFoobarApi()
       .then(res => {
         dispatch({
-          type: 'fetch/organizations',
+          type: 'fetch/foobar',
           payload: res.data
         })
         resolve(res);
