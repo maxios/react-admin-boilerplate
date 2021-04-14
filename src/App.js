@@ -1,14 +1,22 @@
 import React from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
-import Layout from '@/containers/Layout';
-import Foobar from '@/containers/Foobar';
+import { Admin, Resource } from 'react-admin';
+import jsonapiClient from "ra-jsonapi-client";
+import { PostList, PostEdit, PostCreate, PostIcon } from '@/resources/posts.js'
 
-export const App = withRouter(() => {
+const dataProvider = jsonapiClient('http://localhost:3000/api/v1', {});
+
+const App = () => {
   return (
-    <Switch>
-      <Layout>
-        <Route exact path="/" component={Foobar} />
-      </Layout>
-    </Switch>
-  );
-});
+    <Admin dataProvider={dataProvider}>
+      <Resource
+        name="posts"
+        list={PostList}
+        edit={PostEdit}
+        create={PostCreate}
+        icon={PostIcon}
+      />
+    </Admin>
+  )
+};
+
+export default App;
